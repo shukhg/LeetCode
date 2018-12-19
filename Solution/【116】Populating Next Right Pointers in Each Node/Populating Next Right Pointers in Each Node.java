@@ -10,8 +10,7 @@ public class Solution {
         if(root == null)
             return ;
         leverOrder(root);
-    }
-    
+    }   
     public void leverOrder(TreeLinkNode root ){
         Queue<TreeLinkNode> queue = new LinkedList<>();
         queue.offer(root);
@@ -45,8 +44,7 @@ public class Solution {
                 temp  = null;   // 当前层结束,重置 temp 和 pointer
                 pointer = null ;
             }
-        }
-        
+        }    
     }
 }
 
