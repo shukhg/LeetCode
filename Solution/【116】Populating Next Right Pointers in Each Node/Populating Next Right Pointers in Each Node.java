@@ -9,9 +9,9 @@ public class Solution {
     public void connect(TreeLinkNode root) {
         if(root == null)
             return ;
-        leverOrder(root);
+        levelOrder(root);
     }   
-    public void leverOrder(TreeLinkNode root ){
+    public void levelOrder(TreeLinkNode root ){
         Queue<TreeLinkNode> queue = new LinkedList<>();
         queue.offer(root);
         root.next = null;
