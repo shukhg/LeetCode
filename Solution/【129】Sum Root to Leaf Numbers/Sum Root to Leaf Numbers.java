@@ -2,8 +2,6 @@
 用一个List 去存储遍历过程中的一条路径的值，之后再遍历 List 求和即可
 */
 
-
-
 class Solution {
     public int sumNumbers(TreeNode root) {
         List<Integer> list = new ArrayList<>();

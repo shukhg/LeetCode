@@ -1,3 +1,11 @@
+/*
+首先对边界上每一个'O'做深度优先搜索，将与其相连的所有'O'改为'I'。然后遍历矩阵，将矩阵中所有'O'改为'X',将矩阵中所有'I'变为'O'
+注意判断是否要dfs的时候最好在 dfs方法的开头判断，免得麻烦
+注意是要先变为'I' ， 不然会无限递归
+*/
+
+
+
 class Solution {
     int lenRow ,lenCol ;   // 全局变量，为了给 dfs方法用
     public void solve(char[][] board) {

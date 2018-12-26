@@ -6,6 +6,7 @@
 
 
 
+
 class Solution {
     public int singleNumber(int[] nums) {
         if(nums.length == 1) 

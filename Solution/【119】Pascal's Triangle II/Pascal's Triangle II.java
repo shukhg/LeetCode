@@ -5,6 +5,8 @@
 */
 
 
+
+
 class Solution {
     public List<Integer> getRow(int rowIndex) {
         int[] nums = new int[rowIndex + 1];

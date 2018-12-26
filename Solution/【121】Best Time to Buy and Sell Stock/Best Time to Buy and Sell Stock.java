@@ -2,6 +2,7 @@
 只允许交易一次的话，那就一趟遍历，中间记录最小的元素 min 和最大的收益 max，要是遇到更小的元素就更新 min ， 遇到更大的收益就更新 max 即可
 */
 
+
 class Solution {
     public int maxProfit(int[] prices) {
         int max = 0;

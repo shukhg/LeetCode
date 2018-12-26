@@ -3,6 +3,8 @@
 中间的过程注意要区分最左边结点、最右边结点和中间结点
 */
 
+
+
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
         if(triangle == null || triangle.get(0).size() == 0 )
