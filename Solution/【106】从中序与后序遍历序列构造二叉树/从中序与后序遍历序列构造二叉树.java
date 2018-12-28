@@ -26,7 +26,7 @@ class Solution {
         root.left = build(inorder , inLeft , index - 1 , postorder,
                           postLeft , postLeft + index - inLeft - 1 ,hashmap );
         root.right = build(inorder , index + 1 , inRight , postorder , 
-                          postRight - 1 - (inRight - index - 1 ) , postRight - 1 , hashmap );
+                          postRight - 1 - (inRight - index - 1 ) , postRight - 1 , hashmap );   // 可以利用 left的结果，也可以从postRight 去减
                         // 注意此处是 postRight - 1 - (inRight - index - 1 )  用长度去思考这种问题 
         return root ;
         

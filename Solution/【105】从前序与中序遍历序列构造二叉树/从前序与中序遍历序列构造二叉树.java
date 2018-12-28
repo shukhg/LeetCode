@@ -42,7 +42,7 @@ class Solution {
         int index = hashmap.get( root.val );
         root.left = build(preorder , preLeft + 1 , index - inLeft + preLeft ,     // 关键是这两个地方慢慢想清楚
                          inorder , inLeft , index - 1  , hashmap);
-        root.right = build(preorder , preLeft + index - inLeft + 1 , preRight     // 关键是这两个地方慢慢想清楚
+        root.right = build(preorder , preLeft + index - inLeft + 1 , preRight     // 关键是这两个地方慢慢想清楚,可以考虑从上面借鉴，也可以从 preRight 去减（此处是利用上面）
                            , inorder , index + 1 , inRight , hashmap);
         return root ; 
     }
