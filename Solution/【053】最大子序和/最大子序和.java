@@ -1,8 +1,6 @@
 /*
 此题仅用一趟遍历，从前到后，thisSum < 0 就重置为 0
-注意 thisSum 更新的代码一定要在两个 if 中间，不然会出错
-首先，thisSum 更新的代码肯定要在  if(thisSum < 0) 后面，例如第1个元素 < 0 的情景
-其次，thisSum 更新要在 sum 的更新前，例如最后1个元素参与更新的情况下
+注意，thisSum 更新要在 sum 的更新前，例如最后1个元素参与更新的情况下
 */
 
 
@@ -21,5 +19,22 @@ class Solution {
                 sum = thisSum;
         }
         return sum;
+    }
+}
+
+public class Solution {
+    public int FindGreatestSumOfSubArray(int[] array) {
+        if(array == null || array.length == 0)
+            return 0;
+        int result = Integer.MIN_VALUE;
+        int thisSum = array[0];
+        for(int i = 1 ; i < array.length ; i ++){
+            thisSum = thisSum + array[i];
+            if(thisSum > result)
+                result = thisSum;
+            if(thisSum < 0)
+                thisSum = 0;
+        }
+        return result;
     }
 }
