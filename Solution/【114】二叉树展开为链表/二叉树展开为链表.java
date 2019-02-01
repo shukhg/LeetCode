@@ -6,8 +6,28 @@
 */
 
 
+// 递归写法，容易理解。
+class Solution {
+    public void flatten(TreeNode root) {
+        if(root == null)
+            return ;
+        if(root.left != null){
+            TreeNode pre = root.left;
+            while(pre.right != null){
+                pre = pre.right;
+            }
+            pre.right = root.right;
+            root.right = root.left;
+            root.left = null;
+        }
+        flatten(root.right);
+    }
+}
 
 
+
+
+// 非递归写法
 public class Solution {  
     public void flatten(TreeNode root) {
         while (root != null) {
