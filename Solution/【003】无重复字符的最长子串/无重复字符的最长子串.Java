@@ -1,6 +1,6 @@
 /*
-* 利用 HashMap存储 元素值-索引，然后在要一个 index ，保存当前不重复子串的开始位置，
-* 重点是这个 index 要取原先 index 和 hashmap.get(str.charAt(i))的最大值
+利用 HashMap存储 元素值-索引，然后在要一个 index ，保存当前不重复子串的开始位置，
+重点是这个 index 要取原先 index 和 hashmap.get(str.charAt(i))的最大值
 */
 class Solution {
     public static int lengthOfLongestSubstring(String s) {
