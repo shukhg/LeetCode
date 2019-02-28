@@ -4,28 +4,32 @@
 */
 
 
-public class Solution {
+class Solution {
     public List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> res = new ArrayList<List<Integer>>();
-        dfs(res, nums, 0);
-        return res;
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length == 0)
+            return result;
+        dfs(result , nums , 0);
+        return result;
     }
-    private void dfs(List<List<Integer>> res, int[] nums, int j) {
-        if (j == nums.length) {
-            List<Integer> temp = new ArrayList<Integer>();
-            for (int num : nums) 
-                temp.add(num);
-            res.add(temp);
+    public void dfs(List<List<Integer>> result , int[] nums , int start){
+        if(start == nums.length ){
+            List<Integer> list = new ArrayList<>();
+            for(int i = 0 ; i < nums.length ; i ++){
+                list.add(nums[i]);
+            }
+            result.add(new ArrayList<Integer>(list));
+            return ;
         }
-        for (int i = j; i < nums.length; i++) {
-            swap(nums, i, j);
-            dfs(res, nums, j+1);
-            swap(nums, i, j);
+        for(int i = start ; i < nums.length ; i ++){
+            swap(nums , start , i);
+            dfs(result , nums , start + 1);
+            swap(nums , start , i);
         }
     }
-    private void swap(int[] nums, int m, int n) {
-        int temp = nums[m];
-        nums[m] = nums[n];
-        nums[n] = temp;
+    public void swap(int[] nums , int left , int right){
+        int temp = nums[left];
+        nums[left] = nums[right];
+        nums[right] = temp;
     }
 }

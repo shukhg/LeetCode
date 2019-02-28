@@ -6,34 +6,30 @@
 最后结束的时候，还要判断 Stack中是否有元素
 */
 
-
 class Solution {
     public boolean isValid(String s) {
         if(s == null || s.length() == 0)
             return true;
-        Stack<Character> stack = new Stack<>();
-        int count = 0;
+        if(s.length() % 2 == 1)
+            return false;
         HashMap<Character , Character> hashmap = new HashMap<>();
         hashmap.put('(' , ')');
-        hashmap.put('{' , '}');
         hashmap.put('[' , ']');
+        hashmap.put('{' , '}');
+        Stack<Character> stack = new Stack<>();
         for(int i = 0 ; i < s.length() ; i ++){
-            if( hashmap.containsKey(s.charAt(i)) == true){
-                count ++;
+            if(hashmap.containsKey(s.charAt(i))){
                 stack.push(s.charAt(i));
             }
             else{
-                count--;
-                if(count < 0 )   // 把这步提到前面为了防止下面stack中为null却也进行操作
+                if( !stack.isEmpty() && hashmap.get(stack.peek()) == s.charAt(i)  ){
+                    stack.pop();
+                }
+                else{
                     return false;
-                if( hashmap.get(stack.peek()) != s.charAt(i) )
-                    return false;
-                stack.pop();
+                }
             }
         }
-        if(stack.size() == 0)
-            return true;
-        else
-            return false;
+        return stack.isEmpty();
     }
 }
