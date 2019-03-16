@@ -5,20 +5,23 @@
 */
 
 
-public class Solution {
-	public int reverse(int x) {
-        long temp = 0 ;
-        long reNum;
-        if(x < 0){            // 负数的处理 
-            reNum = -x;
+class Solution {
+    public int reverse(int x) {
+        long result = 0;
+        int temp = x;    // 用于暂存 x 正负值的判断
+        if(x < 0){
+            x = -x;
         }
-        else  reNum = x;
-        while(reNum != 0 ){     // 要理解这个循环
-            temp = temp * 10 + reNum % 10;
-            reNum = reNum / 10;
+        while(x != 0){
+            result = result * 10 + x % 10;
+            x = x / 10;
         }
-        if(x < 0) temp = - temp;    // 负数的处理
-        if(temp < Integer.MIN_VALUE || temp > Integer.MAX_VALUE)  return 0;
-        return (int)temp;
+        if(temp < 0){
+            result = -result;
+        }
+        if(result > Integer.MAX_VALUE || result < Integer.MIN_VALUE){
+            return 0;
+        }
+        return (int)result;
     }
 }
