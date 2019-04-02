@@ -4,19 +4,19 @@
 
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        HashMap<Integer , Integer> hashmap = new HashMap<>();
-        int[] ans = new int[2];
-        for(int j = 0 ; j < nums.length ; j++){
-            hashmap.put(nums[j] , j);
-        }
-        for(int i = 0 ; i < nums.length ; i++){
-            int temp = target - nums[i];
-            if(hashmap.containsKey(temp) == true  && hashmap.get(temp) != i ){
-                ans[0] = hashmap.get(temp);
-                ans[1] = i;
+        if(nums == null || nums.length == 0)
+            return null;
+        HashMap<Integer,Integer> hashmap = new HashMap<>();
+        int[] result = new int[2];
+        for(int i = 0 ; i < nums.length ; i ++){
+            int div = target - nums[i];
+            if(hashmap.containsKey(div)){
+                result[0] = i;
+                result[1] = hashmap.get(div);
+                return result;
             }
-            
+            hashmap.put(nums[i] , i);
         }
-        return ans; 
+        return result;
     }
 }
