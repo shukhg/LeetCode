@@ -20,3 +20,27 @@ class Solution {
         inorder(root.right , result );
     }
 }
+
+
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        ArrayList<Integer> result = new ArrayList<>();
+        if(root == null){
+            return result;
+        }
+        Stack<TreeNode> stack = new Stack<>();
+        TreeNode pointer = root;
+        while(pointer != null || stack.isEmpty() == false){
+            while(pointer != null){
+                stack.push(pointer);
+                pointer = pointer.left;
+            }
+            if(stack.isEmpty() == false){
+                pointer = stack.pop();
+                result.add(pointer.val);
+                pointer = pointer.right;
+            }
+        }
+        return result;
+    }
+}
