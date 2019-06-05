@@ -9,16 +9,13 @@
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if s is None:
+        if (s is None) or (len(s) == 0):
             return 0
-        if len(s) == 0:
-            return 0
-        dict = {}
-        result = 0
-        index = 0
+        result , index = 1 , 0
+        map = {}
         for i in range(len(s)):
-            if s[i] in dict:
-                index = max(index , dict[s[i]] + 1)
-            dict[s[i]] = i
-            result = max(result , i - index + 1)
+            if s[i] in map:
+                index = max(index, map[s[i]] + 1)
+            map[s[i]] = i
+            result = max(result, i - index + 1)
         return result

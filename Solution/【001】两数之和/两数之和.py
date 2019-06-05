@@ -22,4 +22,4 @@ class Solution:
                 result.append(dict[div])
                 return result
             dict[num] = i
-            
+        return result
