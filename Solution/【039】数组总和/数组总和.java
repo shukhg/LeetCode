@@ -13,7 +13,7 @@ class Solution {
         return new ArrayList<>(result);
     }
     public void dfs(HashSet<List<Integer>> result , int[] nums , int target , List<Integer> list , int start){
-        if(target < 0)
+        if(target < 0)    // 要注意此处，不然会无线递归
             return ;
         if(target == 0){
             result.add(new ArrayList<Integer>(list));

@@ -1,5 +1,5 @@
 /*
-典型的递归，此处不要辅助的List是因为可以遍历数组直接加入 result
+典型的递归，此处不要辅助的 List 是因为可以遍历数组直接加入 result
 记住此处是交换
 */
 
@@ -23,7 +23,7 @@ class Solution {
         }
         for(int i = start ; i < nums.length ; i ++){
             swap(nums , start , i);
-            dfs(result , nums , start + 1);
+            dfs(result , nums , start + 1);   // 切记这里是 start + 1 而不是 i + 1
             swap(nums , start , i);
         }
     }
