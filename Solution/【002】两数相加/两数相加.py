@@ -6,16 +6,17 @@
 两个链表都为空了，还要使得不以 0 为开头
 '''
 
-
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        if l1 is None and l2 is None:
+            return None
         if l1 is None:
             return l2
         if l2 is None:
             return l1
         result = ListNode(0)
         temp = result
-        while l1 or l2:
+        while True:
             if l1:
                 temp.val = temp.val + l1.val
                 l1 = l1.next
@@ -24,8 +25,8 @@ class Solution:
                 l2 = l2.next
             temp.next = ListNode(temp.val // 10)
             temp.val = temp.val % 10
-            if (l1 is None) and (l2 is None):
-                if(temp.next.val == 0):
+            if l1 is None and l2 is None:
+                if temp.next.val == 0:
                     temp.next = None
                 break
             temp = temp.next
