@@ -5,15 +5,21 @@
 
 class Solution {
     public boolean isPalindrome(int x) {
-        int temp = 0;
-        int ans = x;
-        if( x < 0 ) return false;
-        while(x != 0){
-            temp = temp * 10 + x % 10;
-            x = x  / 10;
+        if(x < 0){
+            return false;
         }
-        if(temp == ans )
+        else if(x < 10){
             return true;
+        }
+        double temp = x;
+        double reverse = 0;
+        while(x != 0){
+            reverse = reverse * 10 + x % 10;
+            x = x / 10;
+        }
+        if(temp == reverse){
+            return true;
+        }
         else{
             return false;
         }

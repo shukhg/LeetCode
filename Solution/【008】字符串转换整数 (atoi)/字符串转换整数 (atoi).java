@@ -11,34 +11,36 @@
 
 class Solution {
     public int myAtoi(String str) {
-        str = str.trim();     //这个一定要在第一步
-        if(str == null || str.length() == 0)
+        str = str.trim();
+        if(str == null || str.length() == 0){
             return 0;
-        boolean flag  = true;
-        double result = 0;    //此处要 double
+        }
+        boolean flag = false;   // false 表示正数，true 表示负数
+        double result = 0;
         int i = 0;
         if(str.charAt(i) == '-'){
-            flag = false;
-            i = i + 1;
-        }
-        else if(str.charAt(i) == '+'){
             flag = true;
             i = i + 1;
         }
-        for( ; i < str.length() ; i ++){
-            int  c = (int)str.charAt(i) - '0';
-            if( c < 0 || c > 9){
-                break;
+        else if(str.charAt(i) == '+'){
+            i = i + 1;
+        }
+        for(; i < str.length() ; i ++){
+            int num = str.charAt(i) - '0';
+            if( num < 0 || num > 9){
+                return (int)result;
             }
-            if(flag == true){
-                result = result * 10 + c;
-                if(result > Integer.MAX_VALUE)
+            if(flag == false){
+                result = result * 10 + num;
+                if(result > Integer.MAX_VALUE){
                     return Integer.MAX_VALUE;
+                }
             }
             else{
-                result = result * 10 - c;
-                if(result < Integer.MIN_VALUE)
+                result = result * 10 - num;
+                if(result < Integer.MIN_VALUE){
                     return Integer.MIN_VALUE;
+                }
             }
         }
         return (int)result;
