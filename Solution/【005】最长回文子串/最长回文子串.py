@@ -10,19 +10,18 @@
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         if s is None or len(s) == 0:
-            return ""
-        dp = [[0 for i in range(len(s))]for i in range(len(s))]
-        start , end = 0 , 0
-        for i in range(len(s)):
-            for j in range(i + 1):
+            return s
+        len_s = len(s)
+        dp = [[False for i in range(len_s)] for j in range(len_s)]
+        start, max_sub_len = 0, 0
+        for i in range(len_s):
+            for j in range(i, -1, -1):
                 if s[i] == s[j]:
-                    if i <= j:
-                        dp[i][j] = 1
-                    elif i - j == 1:
-                        dp[i][j] = 1
+                    if i - j <= 1:
+                        dp[j][i] = True
                     else:
-                        dp[i][j] = dp[i - 1][j + 1]
-                    if dp[i][j] == 1 and i - j > end - start:
+                        dp[j][i] = dp[j + 1][i - 1]
+                    if dp[j][i] and i - j + 1 > max_sub_len:
+                        max_sub_len = i - j + 1
                         start = j
-                        end = i
-        return s[start : end + 1]
+        return s[start: start + max_sub_len]
