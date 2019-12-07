@@ -40,3 +40,31 @@ public class Solution {
         nums[j] = save;
     }
 }
+
+
+// 经典回溯
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length == 0)    return result;
+        boolean[] is_used = new boolean[nums.length];
+        Arrays.sort(nums);
+        dfs(result, nums, new ArrayList<Integer>(), is_used);
+        return result;
+    }
+    public void dfs(List<List<Integer>> result, int[] nums, List<Integer> temp, boolean[] is_used){
+        if(temp.size() == nums.length){
+            result.add(new ArrayList<Integer>(temp));
+            return ;
+        }
+        for(int i = 0; i < nums.length; i ++){
+            if(is_used[i])  continue;
+            if(i > 0 && is_used[i - 1] && nums[i - 1] == nums[i]) continue;  // 这里一定要限定 i - 1 被使用 或者 没有被使用
+            temp.add(nums[i]);
+            is_used[i] = true;
+            dfs(result, nums, temp, is_used);
+            temp.remove(temp.size() - 1);
+            is_used[i] = false;
+        }
+    }
+}
