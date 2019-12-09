@@ -4,6 +4,39 @@
 */
 
 
+// 利用字符出现次数进行计数，判断两个字符串是否相同
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        HashMap<String, List<String>> hashmap = new HashMap<>();
+        for(int i = 0; i < strs.length; i ++){
+            int[] num = new int[26];
+            for(int j = 0; j < strs[i].length(); j ++){
+                num[strs[i].charAt(j) - 'a'] ++;
+            }
+            String key = "";
+            for(int j = 0; j < num.length; j ++){
+                key = key + num[j] + "#";
+            }
+            if(hashmap.containsKey(key)){
+                hashmap.get(key).add(strs[i]);
+            }
+            else{
+                List<String> temp = new ArrayList<>();
+                temp.add(strs[i]);
+                hashmap.put(key, temp);
+            }
+        }
+        return new ArrayList<List<String>>(hashmap.values());
+    }
+}
+
+
+
+
+
+
+
+
 class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         List<List<String>> result = new ArrayList<>();
@@ -29,3 +62,6 @@ class Solution {
         return result;
     }
 }
+
+
+
