@@ -8,36 +8,34 @@
 class Solution {
     public List<Integer> spiralOrder(int[][] matrix) {
         List<Integer> result = new ArrayList<>();
-        if(matrix == null || matrix.length == 0 || matrix[0].length == 0)
+        if(matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0){
             return result;
-        int up = 0;
-        int down = matrix.length - 1;
-        int left = 0;
-        int right = matrix[0].length -1 ;
+        }
+        int left = 0, right = matrix[0].length - 1;
+        int up = 0, down = matrix.length - 1;
         while(left <= right && up <= down){
-            for(int i = left ; i <= right ; i++){
+            for(int i = left; i <= right; i ++){
                 result.add(matrix[up][i]);
             }
             up ++;
-            
-            for(int i = up ; i <= down ; i++){
+
+            for(int i = up; i <= down; i ++){
                 result.add(matrix[i][right]);
             }
             right --;
-            
-            if( up <= down ){            // 此处是关键点， 下  判断，避免重复
-                for(int i = right ; i >= left ; i--){
+
+            if(up <= down){
+                for(int i = right; i >= left; i --){
                     result.add(matrix[down][i]);
                 }
+                down --;
             }
-            down --;
-            
-            if( left <= right){          // 此处是关键点， 左 判断，避免重复
-                for(int i = down ; i >= up ; i--){
+            if(left <= right){
+                for(int i = down; i >= up; i --){
                     result.add(matrix[i][left]);
                 }
+                left ++;
             }
-            left ++;
         }
         return result;
     }
