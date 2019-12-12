@@ -18,7 +18,11 @@ class Solution {
             if(nums[mid] == target){
                 return mid;
             }
+<<<<<<< HEAD
             if(nums[left] < nums[mid]){
+=======
+            if(nums[left] <= nums[mid]){
+>>>>>>> a281a274fb275d4086ca5ecc03b84e8919d4c44b
                 if(nums[mid] >= target && nums[left] <= target){
                     right = mid - 1;
                 }

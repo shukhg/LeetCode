@@ -5,12 +5,9 @@
 
 class Solution {
     public String countAndSay(int n) {
-        if(n == 0)
-            return "";
-        if(n == 1)
-            return "1";
+        if(n == 1)  return "1";
         String result = "1";
-        for(int i = 1 ; i < n ; i ++){
+        for(int i = 1; i < n; i ++){
             result = say(result);
         }
         return result;
@@ -18,7 +15,7 @@ class Solution {
     public String say(String str){
         String result = "";
         int count = 1;
-        for(int i = 1 ; i < str.length() ; i ++){
+        for(int i = 1; i < str.length(); i ++){
             if(str.charAt(i) == str.charAt(i - 1)){
                 count ++;
             }

@@ -1,6 +1,8 @@
 /*
 典型的递归，此处不要辅助的 List 是因为可以遍历数组直接加入 result
 记住此处是交换
+
+第二种方法是典型的 回溯算法
 */
 
 
@@ -33,3 +35,30 @@ class Solution {
         nums[right] = temp;
     }
 }
+
+
+// 典型回溯的模板
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length == 0)    return result;
+        boolean[] is_used = new boolean[nums.length];
+        dfs(result, nums, new ArrayList<Integer>(), is_used);
+        return result;
+    }
+    public void dfs(List<List<Integer>> result, int[] nums, List<Integer> temp, boolean[] is_used){
+        if(temp.size() == nums.length){
+            result.add(new ArrayList<Integer>(temp));
+            return ;
+        }
+        for(int i = 0; i < nums.length; i ++){
+            if(is_used[i])  continue;
+            temp.add(nums[i]);
+            is_used[i] = true;
+            dfs(result, nums, temp, is_used);
+            temp.remove(temp.size() - 1);
+            is_used[i] = false;
+        }
+    }
+}
+
