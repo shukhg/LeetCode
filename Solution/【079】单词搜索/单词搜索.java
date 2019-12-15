@@ -1,6 +1,43 @@
 /*
-和剑指offer 中的题目差不多
+（1）可以先对第一个字符判断，而不用遍历全部的起始位置，节省时间
+（2）可以用 index 表示匹配到第几个元素，也可以用 str.equals()，但是明显是用 index 节省时间
 */
+
+
+
+
+
+class Solution {
+     public boolean exist(char[][] board, String word) {
+        boolean[][] visited = new boolean[board.length][board[0].length];
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (word.charAt(0) == board[i][j] && dfs(i, j, 0, word, visited, board)) return true;
+            }
+        }
+        return false;
+
+    }
+
+    public boolean dfs(int i, int j, int index, String word, boolean[][] visited, char[][] board) {
+        if (index == word.length()) return true;
+        if (i >= board.length || i < 0 || j >= board[0].length || j < 0 || board[i][j] != word.charAt(index) || visited[i][j])
+            return false;
+        visited[i][j] = true;
+        if (dfs(i + 1, j, index + 1, word, visited, board) || dfs(i - 1, j, index + 1, word, visited, board) || dfs(i, j + 1, index + 1, word, visited, board) || dfs(i, j - 1, index + 1, word, visited, board))
+            return true;
+        visited[i][j] = false; // 回溯
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
 
 
 class Solution {

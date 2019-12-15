@@ -1,7 +1,26 @@
 /*
-（1）对比之前类似的题目，中间都是用 nums[i]、nums[i-1]判断
-（2）引入count 计数，判断是否大于2
+既然是最多出现两次，那么可以 index - 2 位置的元素与 i 位置的元素比较，如果相同的话，那就说明该元素已经出现过两次或者以上了，那就不要了
 */
+
+
+
+// 最简单的解法
+class Solution {
+    public int removeDuplicates(int[] nums) {
+        int index = 0;
+        for(int i = 0; i < nums.length; i ++){
+            if(index < 2 || nums[index - 2] != nums[i]){
+                nums[index] = nums[i];
+                index ++;
+            }
+        }
+        return index;
+    }
+}
+
+
+
+
 
 
 class Solution {

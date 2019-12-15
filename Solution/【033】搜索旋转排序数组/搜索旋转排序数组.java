@@ -1,9 +1,15 @@
 /*
-此题要记住
-判断是否满足用 mid 去判断。 然后后面的两个判断就是判断 left 和 mid  以及 right  和 mid 对应元素的大小
-如果 nums[left] <= nums[mid] 则表面左半部分是正常的，转折点肯定在右边
-如果不满足上式，则表明转折点肯定在左边
-if 里面的话，分为在范围中和在范围外
+直接使用二分法，判断那个二分点,有几种可能性
+
+1、直接等于target
+
+2、在左半边的递增区域
+a. target 在 left 和 mid 之间
+b. 不在之间
+
+3、在右半边的递增区域
+a. target 在 mid 和 right 之间
+b. 不在之间
 */
 
 
@@ -18,11 +24,7 @@ class Solution {
             if(nums[mid] == target){
                 return mid;
             }
-<<<<<<< HEAD
-            if(nums[left] < nums[mid]){
-=======
             if(nums[left] <= nums[mid]){
->>>>>>> a281a274fb275d4086ca5ecc03b84e8919d4c44b
                 if(nums[mid] >= target && nums[left] <= target){
                     right = mid - 1;
                 }
