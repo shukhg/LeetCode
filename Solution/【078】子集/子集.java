@@ -1,5 +1,5 @@
 /*
-显然是回溯算法，但是有个问题，怎么样实现回溯的时候不添加元素呢，可以在 list.add()之前直接 dfs(start + 1)
+显然是回溯算法，但是有个问题，怎么样实现回溯的时候不添加元素呢，可以在 for 循环之前直接先 add temp
 想清楚为什么这里不需要 for循环 如果有 for 循环会出现很多重复的。
 当然，先排序然后用HashSet 调用 for循环也是可以的 
 */
@@ -8,21 +8,18 @@
 class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
-        if(nums == null || nums.length == 0)
-            return result;
-        List<Integer> list = new ArrayList<>();
-        dfs(result , nums , list , 0);
+        if(nums == null || nums.length == 0)    return result;
+        HashSet<Integer> hashset = new HashSet<>();
+        dfs(result, nums, 0, new ArrayList<Integer>());
         return result;
     }
-    public void dfs(List<List<Integer>> result , int[] nums , List<Integer> list , int start){
-        if(start == nums.length){
-            result.add(new ArrayList<Integer>(list));
-            return ;
+    public void dfs(List<List<Integer>> result, int[] nums, int start, List<Integer> temp){
+        result.add(new ArrayList<Integer>(temp));
+        for(int i = start; i < nums.length; i ++){
+            temp.add(nums[i]);
+            dfs(result, nums, i + 1, temp);
+            temp.remove(temp.size() - 1);
         }
-        dfs(result , nums , list , start + 1);
-        list.add(nums[start]);
-        dfs(result , nums , list , start + 1);
-        list.remove(list.size() - 1);
     }
 }
 
