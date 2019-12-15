@@ -7,41 +7,27 @@
 // 非递归
 class Solution {
     public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if(l1 == null)
-            return l2;
-        if(l2 == null)
-            return l1;
-        ListNode newHead = new ListNode(0);
-        ListNode p1 = l1; 
-        ListNode p2 = l2;
-        ListNode q = newHead;   // 新链表的最后
-        while(p1 != null && p2 != null){
-            if(p1.val < p2.val){
-                q.next = p1;
-                q = p1;
-                p1 = p1.next;
+        ListNode new_head = new ListNode(0);
+        ListNode q = new_head;
+        while(l1 != null && l2 != null){
+            if(l1.val < l2.val){
+                q.next = l1;
+                l1 = l1.next;
+                q = q.next;
             }
             else{
-                q.next = p2;
-                q = p2;
-                p2 = p2.next;
+                q.next = l2;
+                l2 = l2.next;
+                q = q.next;
             }
         }
-        if(p1 == null){
-            while(p2 != null){
-                q.next = p2;
-                q = p2;
-                p2 = p2.next;
-            }
+        if(l1 == null){
+            q.next = l2;
         }
         else{
-            while(p1 != null){
-                q.next = p1;
-                q = p1;
-                p1 = p1.next;
-            }
+            q.next = l1;
         }
-        return newHead.next;
+        return new_head.next;
     }
 }
 
