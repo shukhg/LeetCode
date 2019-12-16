@@ -10,8 +10,8 @@ class Solution {
         ListNode newHead1 = new ListNode(0);
         ListNode newHead2 = new ListNode(0);
         ListNode pointer = head;
-        ListNode q1 = newHead1;   // newHead后半段的尾插法
-        ListNode q2 = newHead2;   // newHead前半段的尾插法
+        ListNode q1 = newHead1;   
+        ListNode q2 = newHead2;   
         while( pointer != null ){
             if( pointer.val < x  ){
                 q1.next = pointer;
