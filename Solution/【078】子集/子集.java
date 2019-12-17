@@ -9,7 +9,6 @@ class Solution {
     public List<List<Integer>> subsets(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         if(nums == null || nums.length == 0)    return result;
-        HashSet<Integer> hashset = new HashSet<>();
         dfs(result, nums, 0, new ArrayList<Integer>());
         return result;
     }

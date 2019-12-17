@@ -1,35 +1,24 @@
 /*
-找到相应的两个点就行了
+找到 m 点，然后后面的 n-m 个点依次利用头插法即可
 */
 
 class Solution {
     public ListNode reverseBetween(ListNode head, int m, int n) {
-        ListNode dummyHead = new ListNode(0);
-        dummyHead.next = head;
-        // 最终为 m 位置的前一点
-        ListNode mPre = dummyHead;
-        // 最终为 n 位置的后一点
-        ListNode nNext;
-        // 待反转的两点
-        ListNode cur;
-        ListNode next;
-        for (int i = 0; i < m - 1; i++) {
-            mPre = mPre.next;
-        }
-        cur = mPre.next;
-        next = cur.next;
-        nNext = next;
+        ListNode dummy = new ListNode(-1);
+        dummy.next = head;
+        ListNode pre = dummy;
+        // 找到翻转链表部分的前一个节点, 1->2->3->4->5->NULL, m = 2, n = 4 指的是 节点值为1
+        for (int i = 0; i < m - 1; i++) pre = pre.next;
+        // 用 pre, start, tail三指针实现插入操作
+        // tail 是插入pre,与pre.next的节点
+        ListNode start = pre.next;
+        ListNode tail = start.next;
         for (int i = 0; i < n - m; i++) {
-            // 进行反转
-            nNext = next.next;
-            next.next = cur;
-            // 移动到下一个反转处
-            cur = next;
-            next = nNext;
+            start.next = tail.next;
+            tail.next = pre.next;
+            pre.next = tail;
+            tail = start.next;
         }
-        // 反转完毕，需要将两端与 mPre 和 nNext 连接
-        mPre.next.next = nNext;
-        mPre.next = cur;
-        return dummyHead.next;
+        return dummy.next;
     }
 }
