@@ -12,25 +12,26 @@
 class Solution {
     public List<String> restoreIpAddresses(String s) {
         List<String> result = new ArrayList<>();
-        int n = s.length();
-        dfs(0, result, "", 4, s, n); // ip 地址分为4段
+        if(s == null || s.length() == 0)    return result;
+        dfs(result, s, "", 4, 0, s.length());  // ip 地址分为4段
         return result;
     }
-    public void dfs(int index, List<String> result, String temp, int flag, String s, int n){
+    public void dfs(List<String> result, String s, String temp, int flag, int index, int n){
         if(index == n && flag == 0){
-            result.add(temp.substring(0, temp.length() - 1));  // -1 是因为最后的 .
+            result.add(temp.substring(0, temp.length() - 1));
             return ;
         }
-        if(flag < 0)    return;
-        for(int j = index; j < index + 3; j ++){  // 最多考虑包含 index 的后面3个字符
-            if(j < n){   
-                if(index == j && s.charAt(j) == '0'){   // index 位置为 '0'，则直接当作 ip 地址的一个部分
-                    dfs(j + 1, result, temp + s.charAt(j) + ".", flag - 1, s, n);
-                    break;
-                }
-                if(Integer.parseInt(s.substring(index, j + 1)) <= 255){   // 把字串当作 ip 地址的一个部分
-                    dfs(j + 1, result, temp + s.substring(index, j + 1) + ".", flag - 1, s, n);
-                }
+        if(flag < 0)    return ;
+        for(int i = index; i < index + 3; i ++){  // 最多考虑包含 index 的后面3个字符
+            if(i >= n){
+                return;
+            }
+            if(i == index && s.charAt(i) == '0'){  // index 位置为 '0'，则直接当作 ip 地址的一个部分
+                dfs(result, s, temp + s.charAt(i) + '.', flag - 1, i + 1, n);
+                break;   // 这个 break 很关键，不然会出现 001  010 这样的情况
+            }
+            else if(Integer.parseInt(s.substring(index, i + 1)) <= 255){
+                dfs(result, s, temp + s.substring(index, i + 1) + '.', flag - 1, i + 1, n);
             }
         }
     }
