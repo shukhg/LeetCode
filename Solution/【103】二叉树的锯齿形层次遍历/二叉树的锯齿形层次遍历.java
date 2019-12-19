@@ -6,48 +6,39 @@
 class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
-        if(root == null )
-            return result;
-        zigzagLeverOrderCore(root , result );
-        return result;
-    }
-    public void zigzagLeverOrderCore( TreeNode root , List<List<Integer>> result ){
-        List<Integer> temp = new ArrayList<>();
+        if(root == null)    return result;
+        TreeNode pointer = root;
         Queue<TreeNode> queue = new LinkedList<>();
         queue.offer(root);
-        TreeNode pointer = null;
-        int curCount = 1;
-        int nextCount = 0;
-        boolean flag = false ;    // false 表示 不反转 ， true 表示反转  
-        while( queue.isEmpty() == false ){
+        int cur_count = 1, next_count = 0;
+        boolean reverse_flag = false;
+        List<Integer> temp = new ArrayList<>();
+        while(queue.isEmpty() == false){
             pointer = queue.poll();
-            curCount --;
+            cur_count --;
             temp.add(pointer.val);
-            if( pointer.left != null){
-                queue.offer( pointer.left);
-                nextCount ++;
+            if(pointer.left != null){
+                queue.offer(pointer.left);
+                next_count ++;
             }
-            if( pointer.right != null){
-                queue.offer( pointer.right );
-                nextCount ++;
+            if(pointer.right != null){
+                queue.offer(pointer.right);
+                next_count ++;
             }
-            if( curCount == 0 ){
-                if(flag == true){
+            if(cur_count == 0){
+                cur_count = next_count;
+                next_count = 0;
+                if(reverse_flag == true){
                     Collections.reverse(temp);
-                    curCount = nextCount;
-                    nextCount = 0;
-                    result.add(new ArrayList<Integer>(temp) );
-                    temp.clear();
-                    flag = false;
+                    reverse_flag = false;
                 }
                 else{
-                    curCount = nextCount;
-                    nextCount = 0;
-                    result.add(new ArrayList<Integer>(temp) );
-                    temp.clear();
-                    flag = true;
+                    reverse_flag = true;
                 }
+                result.add(new ArrayList<Integer>(temp));
+                temp.clear();
             }
         }
+        return result;
     }
 }
