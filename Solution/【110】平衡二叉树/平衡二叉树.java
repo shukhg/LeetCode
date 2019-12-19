@@ -11,7 +11,7 @@ class Solution {
         if(root.left == null && root.right == null) return true;
         int depth_left = depth(root.left);
         int depth_right = depth(root.right);
-        if(depth_left - depth_right <= 1 && depth_left - depth_right >= -1){   // 深度差的绝对值小于等于1 
+        if( Math.abs(depth_left - depth_right) <= 1){   // 深度差的绝对值小于等于1 
             boolean judge_left =  isBalanced(root.left);
             boolean judge_right = isBalanced(root.right);
             return judge_left && judge_right;
@@ -19,15 +19,11 @@ class Solution {
         return false;
     }
     public int depth(TreeNode root){         // 求树的高度  
-            if(root == null) 
-                return 0;
-            if(root.left == null && root.right == null) 
-                return 1;
+            if(root == null)    return 0;
+            if(root.left == null && root.right == null) return 1;
             int depth_left = depth(root.left);
             int depth_right = depth(root.right);
-            if(depth_left < depth_right)  
-                return depth_right + 1;
-            else  
-                return depth_left + 1;
-        }
+            if(depth_left < depth_right)    return depth_right + 1;
+            else    return depth_left + 1;
+    }
 }
