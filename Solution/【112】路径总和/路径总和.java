@@ -1,25 +1,22 @@
 /*
-* 深刻理解这个题目，其实也就是一个深度优先搜索，也可以说中序遍历。
-* 要想清楚这种题目的逻辑，访问结点操作也就是我们所需要的操作
+深刻理解这个题目，其实也就是一个深度优先搜索
 */
 
 
 class Solution {
     public boolean hasPathSum(TreeNode root, int sum) {
-        if(root == null) 
-            return false;
-        if(root.left == null && root.right == null){
-            if(root.val == sum) 
-                return true;
-        }
-        boolean result = false;
-        result = hasPathSum(root.left , sum - root.val);  //往左子树走 
-        if(result == true)    // 判断 
+        if(root == null)    return false;
+        return search(root, sum);
+    }
+    public boolean search(TreeNode root, int sum){
+        if(root == null)    return false;
+        if(root.val == sum && root.left == null && root.right == null){
             return true;
-        else{
-            result = hasPathSum(root.right , sum - root.val);   // 右子树走 
         }
-        return result;
+        boolean judge_left = search(root.left, sum - root.val);
+        if(judge_left == true)  return true;
+        boolean judge_right = search(root.right, sum - root.val);
+        return judge_right;
     }
 }
 
