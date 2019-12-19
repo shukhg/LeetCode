@@ -1,6 +1,7 @@
 /*
 显然是中序遍历，但是要注意，要判断遍历的时候前一个结点的值比后一个结点的值小
 但是实现方式可以不同，其实没必要利用一个  list 去存储中序遍历的结果，只需要模拟中序遍历的过程然后利用一个 pre 指针保存中序遍历的上一个结点即可
+注意这个中序遍历框架中，一定不能有 if(root.left == null && root.right == null) return    不然 pre 指针没更新
 */
 
 
@@ -8,6 +9,7 @@ class Solution {
     TreeNode pre = null;    // 用 pre 记录中序遍历的上一个结点
     public boolean isValidBST(TreeNode root) {
         if(root == null)    return true;
+        //if(root.left == null && root.right == null) return true;    这句一定不能加， 不然 pre 指针没更新
         boolean judge_left = isValidBST(root.left);
         if(judge_left == false) return false;
         if(pre != null && pre.val >= root.val)  return false;
