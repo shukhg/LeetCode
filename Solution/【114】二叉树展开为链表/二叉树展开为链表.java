@@ -9,17 +9,18 @@
 // 递归写法，容易理解。
 class Solution {
     public void flatten(TreeNode root) {
-        if(root == null)
+        if(root == null)    return ;
+        if(root.left == null){
+            flatten(root.right);
             return ;
-        if(root.left != null){
-            TreeNode pre = root.left;
-            while(pre.right != null){
-                pre = pre.right;
-            }
-            pre.right = root.right;
-            root.right = root.left;
-            root.left = null;
         }
+        TreeNode pre = root.left;
+        while(pre.right != null ){
+            pre = pre.right;
+        }
+        pre.right = root.right;
+        root.right = root.left;
+        root.left = null;
         flatten(root.right);
     }
 }
