@@ -1,4 +1,47 @@
 /*
+（1）dp 数组中是 max_k + 1，因为需要用到 dp[i - 1][k - 1][0]，在 0 次机会的时候肯定为 0。 k 是在买入的时候进行更新的，卖出的时候不要更新，不过换下其实也可以
+（2）dp 数组的更新是关键，只要记住了 dp 数组的更新就好处理
+（3）i == 0 的时候的初始状态需要记住
+*/
+
+
+
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int len = prices.length;
+        if(prices == null || len <= 1)  return 0;
+        int max_k = 2;
+        int[][][] dp = new int[len][max_k + 1][2];
+        for(int i = 0; i < len; i ++){
+            for(int k = 1; k <= max_k; k ++){
+                if(i == 0){
+                    dp[i][k][0] = 0;
+                    dp[i][k][1] = -prices[i];
+                    continue;
+                }
+                dp[i][k][0] = Math.max(dp[i - 1][k][0], dp[i - 1][k][1] + prices[i]);
+                dp[i][k][1] = Math.max(dp[i - 1][k][1], dp[i - 1][k - 1][0] - prices[i]);
+            }
+        }
+        return dp[len - 1][max_k][0];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 121题的拓展，121题只需要交易一次，顺序遍历一遍即可找到最大差。
 现在可以交易两次，我们容易想到，只要计算出所有prices[0,i]和prices[I,len-1]的和，找到最大的即可。
 对于prices[0,i] 同121题，只需遍历一次储存到leftProfit[]中即可。
@@ -6,8 +49,6 @@
 切记右边部分只能从右到左遍历
 最后找到i使得firstProfit[I]+SecondProfit[I]最大就是最大贸易值。
 */
-
-
 
 class Solution {
     public int maxProfit(int[] prices) {
