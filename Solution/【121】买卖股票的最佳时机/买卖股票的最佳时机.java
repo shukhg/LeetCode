@@ -15,6 +15,11 @@ dp[-1][k][1] = dp[i][0][1] = -infinity
 dp[i][k][0] = max(dp[i-1][k][0], dp[i-1][k][1] + prices[i])
 dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
 
+但是此处 k - 1 = 0，而 第二项为 0 的时候肯定是 0  所以改为 
+
+        dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i]);
+        dp[i][1] = Math.max(dp[i - 1][1],  - prices[i]);
+
 */
 
 
