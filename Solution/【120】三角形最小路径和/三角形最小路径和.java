@@ -34,31 +34,25 @@ class Solution {
 }
 
 /*
-更好的解法同样是利用动态规划，但是不再使用二维数组，而只使用一个一维数组
-从后往前（从下往上）进行遍历，同时更新一维 dp数组
-注意更新的时候是从下往上，所以 dp 中 j 部分的索引必须体现下层的 j的索引
-也就是有了  dp[j]  dp[j + 1] 
-还要注意内层循环的遍历范围，一定要是 triangle.get(i).size()
-而不能是全部的 length
+（1）首先要理解的是，二维数组转为一维数组的关键点在于用一维数组去模拟二维数组，也就是一维数组能够在 dp 更新的时候能够实现二维数组的功能。
+    所以此处是用一维数组表示最下面一层的情况，然后在 dp 数组更新当前层的时候实现下层的逻辑
+（2）下层是依赖上层的结果，反过来其实上层也可以当作依赖。而且如果从上层往下层遍历，左右边界要非常小心，所以肯定是从下往上遍历更合适
+（3）内层循环一定要从左边往右边遍历，如果是从右边往左边遍历的话，会出现刚刚更新的 dp[j + 1] 被放入了 dp[j] 的计算中
 */
 
 
 class Solution {
     public int minimumTotal(List<List<Integer>> triangle) {
-        int length = triangle.size();
-        if(triangle == null || triangle.get(0).size() == 0)
-            return 0;
-        if(length == 1 )
-            return triangle.get(0).get(0);
-        int[] dp = new int[length];
-        for(int i = 0 ; i < length ; i ++){
-            dp[i] = triangle.get(length - 1).get(i);
+        int len = triangle.size();
+        int[] dp = new int[len];
+        for(int i = 0; i < len; i ++){
+            dp[i] = triangle.get(len - 1).get(i);
         }
-        for(int i = length - 2 ; i >= 0 ; i --){    // 由后往前更新 dp 
-            for(int j = 0 ; j < triangle.get(i).size()  ; j ++){    // 此步是关键，一定要是  triangle.get(i).size()
-                int sum1 = triangle.get(i).get(j) + dp[j];      
-                int sum2 = triangle.get(i).get(j) + dp[j + 1];    // 此处 j + 1 是下层的体现
-                dp[j] = Math.min(sum1 , sum2);
+        for(int i = len - 2; i >= 0; i --){
+            for(int j = 0; j < triangle.get(i).size(); j ++){
+                int sum1 = triangle.get(i).get(j) + dp[j];
+                int sum2 = triangle.get(i).get(j) + dp[j + 1];
+                dp[j] = Math.min(sum1, sum2);
             }
         }
         return dp[0];
