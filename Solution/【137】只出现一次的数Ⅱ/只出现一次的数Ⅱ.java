@@ -21,6 +21,44 @@ class Solution {
     }
 }
 
+
+
+
+// 其他数字出现 k次，一个数字出现 1 次的统一解法。
+/*
+（1）利用 32维 的数组存储全部数组的每一位的出现次数
+（2）找到出现次数不为 k 的倍数的部分
+（3）将这部分相加即可得到结果
+*/
+class Solution {
+    public int singleNumber(int[] nums) {
+        int result = 0;
+        //考虑每一位
+        for (int i = 0; i < 32; i++) {
+            int count = 0;
+            //考虑每一个数
+            for (int j = 0; j < nums.length; j++) {
+                //当前位是否是 1
+                if ((nums[j] >>> i & 1) == 1) {
+                    count++;
+                }
+            }
+            //1 的个数是否是 3 的倍数
+            if (count % 3 != 0) {
+                result = result | 1 << i;
+            }
+        }
+        return result;
+    }
+}
+
+
+
+
+
+
+
+
 // 利用 Map 和位操作，其实也可以只利用 Map，但是多了一趟循环
 class Solution {
     public int singleNumber(int[] nums) {
