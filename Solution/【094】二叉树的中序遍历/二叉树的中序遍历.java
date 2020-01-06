@@ -7,8 +7,6 @@
 
 
 
-
-// 
 class Solution {
     class ColorNode {
         TreeNode node;
