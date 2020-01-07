@@ -1,8 +1,7 @@
 /*
-用动态规划解决，找出状态转移方程最关键。
-由于乘积可能为负数，负负得正，因此第i-1次的乘积最大值（max_Value_Pre）与最小值（min_Value_Pre）都需要保留。
-当然也可以定义最大值最小值数组来保存第i次乘积的最大值（max_Value）与最小值（min_Value）。
-与Maximum Subarray相比，最大值为max_Value = Math.max(min_Value_Pre * nums[i] , Math.max(max_Value_Pre * nums[i] , nums[i]))
+由于乘积可能为负数，负负得正，因此第 i - 1 次的乘积最大值（max_Value_Pre）与最小值（min_Value_Pre）都需要保留。
+定义最大值最小值数组来保存第 i 次乘积的最大值（max_Value）与最小值（min_Value）。
+最大值为max_Value = Math.max(min_Value_Pre * nums[i] , Math.max(max_Value_Pre * nums[i] , nums[i]))
 最小值为  min_Value = Math.min(min_Value_Pre * nums[i] , Math.min(max_Value_Pre * nums[i] , nums[i]))
 */
 
