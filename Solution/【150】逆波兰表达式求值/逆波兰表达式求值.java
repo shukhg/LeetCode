@@ -7,43 +7,22 @@
 
 class Solution {
     public int evalRPN(String[] tokens) {
-        if(tokens == null || tokens.length == 0)
-            return 0;
-        if(tokens.length == 1)
-            return Integer.parseInt(tokens[0]);
         Stack<Integer> stack = new Stack<>();
-        HashSet<String> hashset = new HashSet<>();
-        hashset.add("+");
-        hashset.add("-");
-        hashset.add("*");
-        hashset.add("/");
-        int temp = 0;
-        for(int i = 0 ; i < tokens.length ; i ++){
-            if(hashset.contains(tokens[i]) == false ){
-                int number = Integer.parseInt(tokens[i]);
-                stack.push(number);
-            }
-            else{
+        for (String s : tokens) {
+            if (s.equals("+")) {
+                stack.push(stack.pop() + stack.pop());
+            } else if (s.equals("-")) {
+                stack.push(-stack.pop() + stack.pop());
+            } else if (s.equals("*")) {
+                stack.push(stack.pop() * stack.pop());
+            } else if (s.equals("/")) {
                 int num1 = stack.pop();
-                int num2 = stack.pop();
-                if(tokens[i].equals("+")){
-                    temp = num1 + num2;
-                    stack.push(temp);
-                }
-                else if(tokens[i].equals("-")){
-                    temp = num2 - num1;
-                    stack.push(temp);
-                }
-                else if(tokens[i].equals("*")){
-                    temp = num2 * num1;
-                    stack.push(temp);
-                }
-                else{
-                    temp = num2 / num1;
-                    stack.push(temp);
-                }
+                stack.push(stack.pop() / num1);
+            } else {
+                stack.push(Integer.parseInt(s));
             }
         }
-        return temp;
+        int result = stack.pop();
+        return result;
     }
 }
