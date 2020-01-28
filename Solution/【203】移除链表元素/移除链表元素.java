@@ -5,12 +5,10 @@
 
 public class Solution {
     public ListNode removeElements(ListNode head, int val) {
-    	ListNode addNode = new ListNode(0);
-    	addNode.next = head;
-    	
-    	ListNode previous = addNode;
+    	ListNode preHead = new ListNode(0);
+    	preHead.next = head;
+    	ListNode previous = preHead;
     	ListNode current = head;
-    	
         while(current != null){
         	if(current.val == val){
         		previous.next = current.next;
@@ -20,6 +18,6 @@ public class Solution {
         		current = current.next;
         	}
         }
-        return addNode.next;
+        return preHead.next;
     }
 }

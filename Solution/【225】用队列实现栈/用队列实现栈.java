@@ -1,10 +1,11 @@
 /*
 （1）用两个队列实现
 （2）调用构造器的时候也要调用两个队列的构造器
-（3）push() 操作的一定是每次往非空（除非两个全为空）的队列添加元素
-（4）pop() 操作是一个队列往另一个队列中加入元素，直到剩余一个元素,然后将这个剩余的元素poll()
-（5）top() 操作类似于 pop() ，注意其中的细节，最好是用result存储，注意要将全部元素放到另一个队列后再return
-（6）判断为空时要两个队列均为空
+（3）一次操作结束后一定是有一个队列为空的
+（4）push() 操作的一定是每次往非空（除非两个全为空）的队列添加元素
+（5）pop() 操作是一个队列往另一个队列中加入元素，直到剩余一个元素,然后将这个剩余的元素poll()
+（6）top() 操作类似于 pop() ，注意其中的细节，最好是用result存储，注意要将全部元素放到另一个队列后再return
+（7）empty() 时要两个队列均为空
 */
 
 
@@ -82,11 +83,3 @@ class MyStack {
     }
 }
 
-/**
- * Your MyStack object will be instantiated and called as such:
- * MyStack obj = new MyStack();
- * obj.push(x);
- * int param_2 = obj.pop();
- * int param_3 = obj.top();
- * boolean param_4 = obj.empty();
- */
