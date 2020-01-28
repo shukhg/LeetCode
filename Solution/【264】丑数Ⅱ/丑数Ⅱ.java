@@ -31,7 +31,7 @@
 */
 
 
-// 附加题 丑数的判断
+
 class Solution {
     public int nthUglyNumber(int n) {
         if(n <= 0)
@@ -57,29 +57,3 @@ class Solution {
 }
 
 
-public class Solution {
-    public int GetUglyNumber_Solution(int index) {
-        if(index <= 0 )
-            return 0;
-        ArrayList<Integer> list = new ArrayList<>();
-        int i2 = 0 , i3 = 0 , i5 = 0;      // 三个"队列"
-        list.add(1);
-        while(list.size() < index){
-            int m2 = list.get(i2) * 2;
-            int m3 = list.get(i3) * 3;
-            int m5 = list.get(i5) * 5;
-            int min = Math.min(m2 , Math.min(m3 , m5));
-            list.add(min);
-            if(min == m2){
-                i2 ++;
-            }
-            if(min == m3){
-                i3 ++;
-            }
-            if(min == m5){
-                i5 ++;
-            }
-        }
-        return list.get(index - 1);
-    }
-}

@@ -7,17 +7,15 @@
 
 class Solution {
     public int getSum(int a, int b) {
-        if(a == 0 )
-            return b;
-        if(b == 0)
-            return a;
-        int temp1 = a ^ b;  
-        int temp2 = (a & b )<< 1;   // temp2 是体现了进位
-        if(temp2 != 0){
-            return getSum( temp1 , temp2);
+        if(a == 0)  return b;
+        if(b == 0)  return a;
+        int temp1 = a ^ b;
+        int temp2 = (a & b) << 1;
+        if(temp2 == 0){
+            return temp1;
         }
         else{
-            return temp1;
+            return getSum(temp1, temp2);
         }
     }
 }
