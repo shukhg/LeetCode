@@ -1,7 +1,11 @@
 /*
-（1）用一个数组表示若干个数，每一个值表达一个数。用一个二进制数 表示不同数 的使用情况
-（2）思路：自己选一个最大的使得自己可以赢，或者 自己选一个后使得对方没法赢
-
+（1）思路：自己选一个最大的使得自己可以赢，或者 自己选一个后使得对方没法赢
+（2）典型的回溯问题，但是对回溯的结果需要记忆（有些类似于动态规划）
+（3）首先判断数字总和（利用求和公式）与 target 的关系，要是恰好相等，就判断可供选择的数字的个数来返回结果
+（4）需要记录每个数字的使用情况，可以用一个 int 类型的 bits，每一位就代表一个数的使用情况。有新的数被使用了的话，就 bits | curBit 其中 curBit = 1 << num   这是一个很有用的技巧
+（5）如果暴力 dfs 的话，那么会超时，所以需要像动态规划这样把中间的一些结果给记录下来。
+（6）dp 数组是记录 bits（当前被使用的元素）之后选一个剩下的元素是否可以赢。
+（7）如果 dp 数组中存在 bits 的值，就返回，不存在的话就再进行计算，节约时间
 */
 
 
@@ -13,10 +17,10 @@ class Solution {
         if(canReachTotal < desiredTotal){
             return false;
         }
-        else if(canReachTotal == desiredTotal){    // 刚好达到，则奇数赢
-            if(maxChoosableInteger % 2 == 1)
+        else if(canReachTotal == desiredTotal){    // 刚好达到
+            if(maxChoosableInteger % 2 == 1)   // 可供选择的元素个数为奇数，则先选的人赢
                 return true;
-            else
+            else                       // 否则后选的人赢
                 return false;
         }
         else{
@@ -43,3 +47,4 @@ class Solution {
         return result;
     }
 }
+
