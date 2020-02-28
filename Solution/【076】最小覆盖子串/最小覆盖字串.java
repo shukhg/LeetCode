@@ -2,8 +2,10 @@
 （1）滑动窗口，指针为 left 和 right，right 一直往右边移动，直到窗口内的元素都满足要求
 （2）移动 left，直到窗口内的元素不满足要求。如果 result 有更新，则更新 result
 （3）然后重复直到 right 到达边界
-
-注意从 map 中取出的数据是 Integer，尽管会自动拆箱，但是在 == 的时候还是会出问题，所以加了 intValue()
+（4）用两个 hashmap，分别表示 window 和 needs
+（5）注意对于某个字符，如果 window 中出现的次数 > needs 中改字符的次数，则表明匹配到了一个字符，match ++
+（6）如果 match == needs.size() 也就是匹配了全部的字符，然后就把 left 一直向左边移动，直到 match != needs.size()
+（7）注意从 map 中取出的数据是 Integer，尽管会自动拆箱，但是在 == 的时候还是会出问题，所以加了 intValue()
 */
 
 
