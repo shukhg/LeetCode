@@ -13,8 +13,8 @@ class Solution {
             return result;
         
         List<Integer> list_1 = new ArrayList<>();   // 先处理第一行
-            list_1.add(1);
-            result.add(list_1);
+        list_1.add(1);
+        result.add(list_1);
         if(numRows == 1){
             return result ;
         }
